@@ -29,6 +29,7 @@ def main():
     x = SCREEN_WIDTH /2
     y = SCREEN_HEIGHT /2
     player = Player(x, y)
+    player_hits = 0
     player_score = 0
     def __init__(self, x, y):
         self.x = SCREEN_WIDTH /2
@@ -51,22 +52,28 @@ def main():
         for draws in drawable:
             player.draw(screen)
             for aster in asteroids:
+                if aster.position[0] < -60 or aster.position[0] > 1340 or aster.position[1] < -60 or aster.position[1] > 780:
+                    aster.kill()
                 aster.draw(screen)
             for shot in shots:
+                if shot.position[0] < -5 or shot.position[0] > 1285 or shot.position[1] < -5 or shot.position[1] > 725:
+                    shot.kill()
                 shot.draw(screen)
         for aster in asteroids:
             for shot in shots:
                 if aster.collides_with(shot):
                     log_event("asteroid_shot")
-                    player_score += 1
-                    aster.split()
+                    player_hits += 1
+                    if aster.split() == 1:
+                        player_score += 1
                     shot.kill()
             if aster.collides_with(player):
                 log_event("player_hit")
                 print("")
                 print("     Game over!")
                 print("")
-                print(f" {player_score} asteroids hit!")
+                print(f" {player_hits} asteroids hit!")
+                print(f" {player_score} asteroids destroyed!")
                 print("")
                 sys.exit()
         
