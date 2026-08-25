@@ -52,11 +52,11 @@ def main():
         for draws in drawable:
             player.draw(screen)
             for aster in asteroids:
-                if aster.position[0] < -60 or aster.position[0] > 1340 or aster.position[1] < -60 or aster.position[1] > 780:
+                if aster.position[0] < -60 or aster.position[0] > 1980 or aster.position[1] < -60 or aster.position[1] > 1140:
                     aster.kill()
                 aster.draw(screen)
             for shot in shots:
-                if shot.position[0] < -5 or shot.position[0] > 1285 or shot.position[1] < -5 or shot.position[1] > 725:
+                if shot.position[0] < -5 or shot.position[0] > 4000 or shot.position[1] < -5 or shot.position[1] > 2500:
                     shot.kill()
                 shot.draw(screen)
         for aster in asteroids:
